@@ -6,18 +6,26 @@ document.querySelector("#btnagregar").addEventListener("click", validarSemilla)
 function print() {
     let filas = document.getElementById("filas");
     filas.innerHTML = '';
-    productos.forEach(producto=>
-    filas.innerHTML += `
+    productos.forEach(producto =>
+        filas.innerHTML += `
         <tr>
+                <th scope="row">${producto.code}</th>
                 <td>${producto.name}</td>
                 <td>${producto.desc}</td>
                 <td>${producto.precio}</td>
+                <td><button type="button" id="${producto.code}" class="btn btn-primary">Editar</button></td>
+                <td><button type="button" id="${producto.code}" class="btn btn-danger eliminar">Eliminar</button></td>
         </tr>`
     )
+    let deletebutton = Array.from(document.getElementsByClassName('eliminar'))
+    deletebutton.forEach(button=>button.addEventListener('click', (event)=>deleteweed(event.target.id)))
 }
+
+
 
 function validarSemilla() {
 
+    let code = document.getElementById("code").value;
     let name = document.getElementById("nombre").value;
     let desc = document.getElementById("desc").value;
     let precio = document.getElementById("precio").value;
@@ -26,6 +34,7 @@ function validarSemilla() {
         alert("No olvides rellenar todos los campos")
     } else {
         producto = {
+            code,
             name,
             desc,
             precio
@@ -37,8 +46,20 @@ function validarSemilla() {
 
 
 function insert(producto1) {//create
-    productos.push(producto1);
-    localStorage.setItem("weed", JSON.stringify(productos));
+    getProducts();
+    let exitencia = productos.find((element) => {
+
+        element.code === producto1.code
+    })
+    console.log(exitencia)
+    if (exitencia === undefined) {
+        alert("lñadks")
+        productos.push(producto1);
+        localStorage.setItem("weed", JSON.stringify(productos));
+        getProducts();
+    } else {
+        alert("debe ingresar un dato valido")
+    }
 }
 
 function getProducts() {//conseguir datos
@@ -46,10 +67,17 @@ function getProducts() {//conseguir datos
     productos = !listaweed ? [] : JSON.parse(listaweed);
     print()
     return productos;
-    
+
 }
 
-
+function deleteweed(code) {
+    productos = productos.filter((element)=>{
+        
+        element.code !==code
+        console.log(code)
+    })
+    console.log(productos)
+}
 
 
 
