@@ -1,19 +1,32 @@
 const productos = [];
 
+document.querySelector("#btnagregar").addEventListener("click",validarSemilla)
+
+function validarSemilla (){
+    
+    let name = document.getElementById("nombre").value;
+    let desc = document.getElementById("desc").value;
+    let precio = document.getElementById("precio").value;
+
+    if(nombre === "" || desc === ""|| precio === "")
+    {
+        alert("No olvides rellenar todos los campos")
+    } else {
+        producto = {
+            name,
+            desc,
+            precio
+        }
+        insert(producto);
+    }
+}
 
 
-function insert(){
-    producto = {
-        name: "weedsd",
-        desc: "descrpcion",
-        price: "13.000"
-    }
-    producto2 = {
-        name: "weed",
-        desc: "descrpcion",
-        price: "13.000"
-    }
-    productos.push(producto)
+
+function insert(producto1){
+    productos.push(producto1);
+    console.log(productos);
+    localStorage.setItem("weed", JSON.stringify(productos));
 }
 
 insert()
