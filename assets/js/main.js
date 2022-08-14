@@ -21,24 +21,43 @@ function print() {
         </tr>`
     )
     let deletebutton = Array.from(document.getElementsByClassName('eliminar'))
-    deletebutton.forEach(button=>button.addEventListener('click', (event)=>deleteweed(event.target.id)))
+    deletebutton.forEach(button => button.addEventListener('click', (event) => deleteweed(event.target.id)))
 
     let editbutton = Array.from(document.getElementsByClassName('editar'))
-    editbutton.forEach(button=>button.addEventListener('click', (event)=>editweed(event.target.id)))
+    editbutton.forEach(button => button.addEventListener('click', (event) => editweed(event.target.id)))
 }
 
 function deleteweed(code) {
-    let number = parseInt(code)
-    productos = productos.filter(element=> element.code !==  number)
-    console.log(productos)
-    localStorage.setItem("weed", JSON.stringify(productos));
-    print();
+    Swal.fire({
+        title: 'Desea eliminar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let number = parseInt(code)
+            productos = productos.filter(element => element.code !== number)
+            console.log(productos)
+            localStorage.setItem("weed", JSON.stringify(productos));
+            print();
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                title: 'Eliminado Exitosamente',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    })
 }
 
-function editweed (code){
+function editweed(code) {
     console.log(code)
     let number = parseInt(code)
-    let productoe = productos.filter(element=>element.code === number)
+    let productoe = productos.filter(element => element.code === number)
     let iCode = document.getElementById("code");
     let iName = document.getElementById("nombre")
     let iDesc = document.getElementById("desc");
@@ -49,10 +68,16 @@ function editweed (code){
     iPrecio.value = productoe[0].precio;
     document.getElementById("btneditar").style.display = "";
     document.getElementById("btnagregar").style.display = "none";
-
 }
 
-function saveEditweed (){
+function saveEditweed() {
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Se ha editado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+    })
     let code = parseInt(document.getElementById("code").value);
     let name = document.getElementById("nombre").value;
     let desc = document.getElementById("desc").value;
@@ -63,18 +88,16 @@ function saveEditweed (){
         desc,
         precio
     }
-    let index = productos.findIndex(element=>element.code===code)
-    productos[index]=producto;
+    let index = productos.findIndex(element => element.code === code)
+    productos[index] = producto;
     localStorage.setItem("weed", JSON.stringify(productos));
+
     print();
     vaciarInputs();
+
+    document.getElementById("btnagregar").style.display = "";
+    document.getElementById("btneditar").style.display = "none";
 }
-
-
-
-
-
-
 
 function validarSemilla() {
     let code = parseInt(document.getElementById("code").value);
@@ -82,7 +105,7 @@ function validarSemilla() {
     let desc = document.getElementById("desc").value;
     let precio = parseInt(document.getElementById("precio").value);
     if (nombre === "" || desc === "" || precio === "") {
-        alert("No olvides rellenar todos los campos")
+        alertx("No olvides rellenar todos los campos")
     } else {
         producto = {
             code,
@@ -101,11 +124,19 @@ function insert(producto1) {//create
     getProducts();
     let exitencia = productos.find((element) => element.code === producto1.code)
     if (exitencia === undefined) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Ingresado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+        })
         productos.push(producto1);
         localStorage.setItem("weed", JSON.stringify(productos));
         getProducts();
+
     } else {
-        alert("debe ingresar un dato valido")
+        alertx("debe ingresar un codigo innexistente")
     }
 }
 
@@ -116,11 +147,19 @@ function getProducts() {//conseguir datos
     return productos;
 }
 
-function vaciarInputs () {
-    document.getElementById("code").value="";
-    document.getElementById("nombre").value="";
-    document.getElementById("desc").value="";
-    document.getElementById("precio").value="";
+function vaciarInputs() {
+    document.getElementById("code").value = "";
+    document.getElementById("nombre").value = "";
+    document.getElementById("desc").value = "";
+    document.getElementById("precio").value = "";
 }
 
 getProducts();
+
+function alertx(text) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text
+    })
+}
