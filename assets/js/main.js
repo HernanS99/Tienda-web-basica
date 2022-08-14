@@ -14,13 +14,16 @@ function print() {
                 <td>${producto.name}</td>
                 <td>${producto.desc}</td>
                 <td>${producto.precio}</td>
-                <td><button type="button" id="${producto.code}" class="btn btn-primary">Editar</button></td>
+                <td><button type="button" id=${producto.code} class="btn btn-primary editar">Editar</button></td>
                 <td><button type="button" id=${producto.code} class="btn btn-danger eliminar">Eliminar</button></td>
         </tr>`
     )
     
     let deletebutton = Array.from(document.getElementsByClassName('eliminar'))
     deletebutton.forEach(button=>button.addEventListener('click', (event)=>deleteweed(event.target.id)))
+
+    let editbutton = Array.from(document.getElementsByClassName('editar'))
+    editbutton.forEach(button=>button.addEventListener('click', (event)=>editweed(event.target.id)))
 }
 
 function deleteweed(code) {
@@ -32,6 +35,22 @@ function deleteweed(code) {
     localStorage.setItem("weed", JSON.stringify(productos));
     print();
 }
+
+function editweed (code){
+    console.log(code)
+    let number = parseInt(code)
+    let productoe = productos.filter(element=>element.code === number)
+    let iCode = document.getElementById("code");
+    let iName = document.getElementById("nombre")
+    let iDesc = document.getElementById("desc");
+    let iPrecio = document.getElementById("precio");
+    iCode.value = productoe[0].code;
+    iName.value = productoe[0].name;
+    iDesc.value = productoe[0].name;
+    iPrecio.value = productoe[0].precio;
+    console.log(productoe)
+}
+
 
 
 function validarSemilla() {
@@ -77,8 +96,7 @@ function getProducts() {//conseguir datos
     productos = !listaweed ? [] : JSON.parse(listaweed);
     print()
     return productos;
-}
-
+} 
 
 
 
