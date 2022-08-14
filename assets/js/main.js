@@ -2,6 +2,7 @@ let productos = [];
 let producto = {}
 
 document.querySelector("#btnagregar").addEventListener("click", validarSemilla)
+document.querySelector("#btneditar").addEventListener("click", saveEditweed)
 
 
 function print() {
@@ -48,7 +49,21 @@ function editweed (code){
     iName.value = productoe[0].name;
     iDesc.value = productoe[0].name;
     iPrecio.value = productoe[0].precio;
-    console.log(productoe)
+
+}
+
+function saveEditweed (){
+    let code = parseInt(document.getElementById("code").value);
+    let name = document.getElementById("nombre").value;
+    let desc = document.getElementById("desc").value;
+    let precio = parseInt(document.getElementById("precio").value);
+    producto = {
+        code,
+        name,
+        desc,
+        precio
+    }
+    insert(producto)
 }
 
 
@@ -77,11 +92,7 @@ function validarSemilla() {
 
 function insert(producto1) {//create
     getProducts();
-    let exitencia = productos.find((element) => {
-
-        element.code === producto1.code
-    })
-    console.log(exitencia)
+    let exitencia = productos.find((element) => element.code === producto1.code)
     if (exitencia === undefined) {
         productos.push(producto1);
         localStorage.setItem("weed", JSON.stringify(productos));
@@ -96,7 +107,9 @@ function getProducts() {//conseguir datos
     productos = !listaweed ? [] : JSON.parse(listaweed);
     print()
     return productos;
-} 
+}
+
+
 
 
 
