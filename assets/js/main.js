@@ -4,6 +4,7 @@ let producto = {}
 document.querySelector("#btnagregar").addEventListener("click", validarSemilla)
 document.querySelector("#btneditar").addEventListener("click", saveEditweed)
 
+document.getElementById("btneditar").style.display = "none";
 
 function print() {
     let filas = document.getElementById("filas");
@@ -19,7 +20,6 @@ function print() {
                 <td><button type="button" id=${producto.code} class="btn btn-danger eliminar">Eliminar</button></td>
         </tr>`
     )
-    
     let deletebutton = Array.from(document.getElementsByClassName('eliminar'))
     deletebutton.forEach(button=>button.addEventListener('click', (event)=>deleteweed(event.target.id)))
 
@@ -29,9 +29,7 @@ function print() {
 
 function deleteweed(code) {
     let number = parseInt(code)
-    productos = productos.filter(element=>
-        element.code !==  number
-    )
+    productos = productos.filter(element=> element.code !==  number)
     console.log(productos)
     localStorage.setItem("weed", JSON.stringify(productos));
     print();
@@ -49,6 +47,8 @@ function editweed (code){
     iName.value = productoe[0].name;
     iDesc.value = productoe[0].name;
     iPrecio.value = productoe[0].precio;
+    document.getElementById("btneditar").style.display = "";
+    document.getElementById("btnagregar").style.display = "none";
 
 }
 
@@ -66,20 +66,21 @@ function saveEditweed (){
     let index = productos.findIndex(element=>element.code===code)
     productos[index]=producto;
     localStorage.setItem("weed", JSON.stringify(productos));
-    print()
+    print();
+    vaciarInputs();
 }
 
 
 
 
 
-function validarSemilla() {
 
+
+function validarSemilla() {
     let code = parseInt(document.getElementById("code").value);
     let name = document.getElementById("nombre").value;
     let desc = document.getElementById("desc").value;
     let precio = parseInt(document.getElementById("precio").value);
-
     if (nombre === "" || desc === "" || precio === "") {
         alert("No olvides rellenar todos los campos")
     } else {
@@ -90,6 +91,7 @@ function validarSemilla() {
             precio
         }
         insert(producto)
+        vaciarInputs();
     }
 }
 
@@ -114,9 +116,11 @@ function getProducts() {//conseguir datos
     return productos;
 }
 
-
-
-
-
+function vaciarInputs () {
+    document.getElementById("code").value="";
+    document.getElementById("nombre").value="";
+    document.getElementById("desc").value="";
+    document.getElementById("precio").value="";
+}
 
 getProducts();
