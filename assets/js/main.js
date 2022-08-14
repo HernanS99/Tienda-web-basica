@@ -63,8 +63,13 @@ function saveEditweed (){
         desc,
         precio
     }
-    insert(producto)
+    let index = productos.findIndex(element=>element.code===code)
+    productos[index]=producto;
+    localStorage.setItem("weed", JSON.stringify(productos));
+    print()
 }
+
+
 
 
 
