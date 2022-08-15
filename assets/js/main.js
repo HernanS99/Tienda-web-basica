@@ -59,12 +59,12 @@ function editweed(code) {
     let number = parseInt(code)
     let productoe = productos.filter(element => element.code === number)
     let iCode = document.getElementById("code");
-    let iName = document.getElementById("nombre")
+    let iName = document.getElementById("inputweed");
     let iDesc = document.getElementById("desc");
     let iPrecio = document.getElementById("precio");
     iCode.value = productoe[0].code;
     iName.value = productoe[0].name;
-    iDesc.value = productoe[0].name;
+    iDesc.value = productoe[0].desc;
     iPrecio.value = productoe[0].precio;
     document.getElementById("btneditar").style.display = "";
     document.getElementById("btnagregar").style.display = "none";
@@ -80,7 +80,7 @@ function saveEditweed() {
         timer: 1500
     })
     let code = parseInt(document.getElementById("code").value);
-    let name = document.getElementById("nombre").value;
+    let name = document.getElementById("inputweed").value;
     let desc = document.getElementById("desc").value;
     let precio = parseInt(document.getElementById("precio").value);
     producto = {
@@ -103,10 +103,10 @@ function saveEditweed() {
 
 function validarSemilla() {
     let code = parseInt(document.getElementById("code").value);
-    let name = document.getElementById("nombre").value;
     let desc = document.getElementById("desc").value;
+    let name = document.getElementById("inputweed").value;
     let precio = parseInt(document.getElementById("precio").value);
-    if (nombre === "" || desc === "" || precio === "") {
+    if (name === "" || desc === "" || precio === "") {
         alertx("No olvides rellenar todos los campos")
     } else {
         producto = {
