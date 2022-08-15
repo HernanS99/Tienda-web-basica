@@ -151,7 +151,7 @@ function getProducts() {//conseguir datos
 
 function vaciarInputs() {
     document.getElementById("code").value = "";
-    document.getElementById("nombre").value = "";
+    document.getElementById("inputweed").value = "";
     document.getElementById("desc").value = "";
     document.getElementById("precio").value = "";
 }
