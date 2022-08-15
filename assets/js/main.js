@@ -68,6 +68,7 @@ function editweed(code) {
     iPrecio.value = productoe[0].precio;
     document.getElementById("btneditar").style.display = "";
     document.getElementById("btnagregar").style.display = "none";
+    iCode.disabled = true;
 }
 
 function saveEditweed() {
@@ -94,9 +95,10 @@ function saveEditweed() {
 
     print();
     vaciarInputs();
-
+    
     document.getElementById("btnagregar").style.display = "";
     document.getElementById("btneditar").style.display = "none";
+    document.getElementById("code").disabled = false
 }
 
 function validarSemilla() {
