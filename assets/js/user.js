@@ -11,7 +11,11 @@ function login (){
     let pass = document.getElementById("pass").value;
     let existe = usuarios.find((element) => element.name===mail && element.password===pass);
     if(existe===undefined){
-        alert("Debe ingresar un usuario existente");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debe ingresar un usuario existente!',
+          })
     }else{
         location.href ="../../menuproductos.html";
     }

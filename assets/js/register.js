@@ -7,17 +7,31 @@ function register (){
     let mail = document.getElementById("mail").value;
     let pass = document.getElementById("pass").value;
     let existe = usuarios.find((element) => element.name===mail && element.password===pass);
-    console.log(existe)
     if(existe===undefined){
-        alert("usuario ingresado existente");
-        location.href ="../../login.html";
+        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        
         user = {
             name: mail,
             password : pass
         }
+        setTimeout(()=>{
+            location.href ="../../login.html";
+        },1500)
+        
         insert(user)
     }else{
-        alert("Usuario existente");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuario ingresado ya existente',
+          })
     }
 }
 
