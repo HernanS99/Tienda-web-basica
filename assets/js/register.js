@@ -25,7 +25,7 @@ function register (){
                 password : pass
             }
             setTimeout(()=>{
-                location.href ="../../login.html";
+                location.href ="./login.html";
             },1500)
             
             insert(user)

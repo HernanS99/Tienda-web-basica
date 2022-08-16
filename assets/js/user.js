@@ -19,7 +19,7 @@ function login (){
                 text: 'Debe ingresar un usuario existente!',
               })
         }else{
-            location.href ="../../menuproductos.html";
+            location.href ="./menuproductos.html";
         }
     }else{
         Swal.fire({
