@@ -6,7 +6,7 @@ function print(){
     productos.forEach(element=>{
         cards.innerHTML += `
                 <div class="card" style="width: 18rem;">
-                    <img src="./assets/img/${element.name}.jpeg" class="card-img-top" alt="...">
+                    <img src="./assets/img/${element.name}.jpeg" class="card-img-top" width="100px" height="250px" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${element.name}</h5>
                         <p class="card-text">${element.desc}</p>

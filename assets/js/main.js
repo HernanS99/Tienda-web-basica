@@ -95,7 +95,7 @@ function saveEditweed() {
 
     print();
     vaciarInputs();
-    
+
     document.getElementById("btnagregar").style.display = "";
     document.getElementById("btneditar").style.display = "none";
     document.getElementById("code").disabled = false
@@ -155,6 +155,7 @@ function vaciarInputs() {
     document.getElementById("desc").value = "";
     document.getElementById("precio").value = "";
 }
+
 
 getProducts();
 
