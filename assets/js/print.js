@@ -17,8 +17,6 @@ function print() {
                 </div>
         `
     })
-
-
 }
 
 function getProducts() {//conseguir datos
@@ -28,13 +26,13 @@ function getProducts() {//conseguir datos
         productosFiltrados = JSON.parse(listaweed)
         print()
     }
-
 }
 
 function filtrar(fil) {
     productosFiltrados = productos.filter(producto => producto.name.includes(fil))
     print()
 }
+
 function ordenarMaMe(fil) {
     switch (fil) {
         case 'mayor':
@@ -46,6 +44,7 @@ function ordenarMaMe(fil) {
             print()
             break;
         case 'o':
+            
             break;
         case 'ascendente':
             productosFiltrados.sort((a,b)=>a.name.localeCompare(b.name))
@@ -56,8 +55,6 @@ function ordenarMaMe(fil) {
             print()
             break;
     }
-
-    
 }
 
 let seacher = document.getElementById('search')
