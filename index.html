@@ -83,12 +83,23 @@
                 <div class="col-md-12 text-center">
                     <p class="fs-1">Catalogo</p>
                 </div>
-            <div class="row">
-                <div class="col-md-12 my-5">
+            <div class="row d-flex">
+                <div class="col-9 my-5 ">
                     <div class="form-outline">
                         <input type="text" id="search" class="form-control" placeholder="Buscar" name="buscador" />
-                      </div>
+                        
+                    </div>
                 </div>
+                    <div class="col-3 my-5 ">
+                        <select name="ordenar" id="ordenar" class="form-select">
+                            <option value="o">Ordenar por:</option>
+                            <option value="mayor">Precio Mayor a Menor</option>
+                            <option value="menor">Precio Menor a Mayor</option>
+                            <option value="ascendente">Ordenar alfabeticamente ascendente</option>
+                            <option value="descendente">Ordenar alfabeticamente descendente</option>
+                          </select>
+                    </div>
+                
             </div>
             </div>
             <div class="row gap-5" id="cards">
